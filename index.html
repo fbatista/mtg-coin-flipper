@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style id="compiled-css" type="text/css">
+      label {
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      button {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="frenetic_solver">
+      <h2>
+        Resolving Frenetic Efreet
+      </h2>
+      <label>
+        Krark Thumbs:
+        <input type="number" id="frenetic_krark_thumb_count" value="0">
+      </label>
+
+      <label>
+        Number of flips:
+        <input type="number" id="frenetic_flips_count" value="1">
+      </label>
+      <button>
+        Go!
+      </button>
+      <label>
+        Number of wins:
+        <span id="frenetic_wins_count"></span>
+      </label>
+    </form>
+    <hr>
+    <form id="okaun_solver">
+      <h2>
+        Resolving Okaun // Zndrsplt
+      </h2>
+      <label>
+        Krark Thumbs:
+        <input type="number" id="okaun_krark_thumb_count" value="0">
+      </label>
+      <button>
+        Go!
+      </button>
+      <label>
+        Number of wins (cards drawn):
+        <span id="okaun_wins_count"></span>
+      </label>
+      <label>
+        Okaun Power multiplier:
+        <span id="okaun_multi"></span>
+      </label>
+    </form>
+    <hr>
+    <form id="krark_solver">
+      <h2>
+        Resolving Krark // Sakashima
+      </h2>
+      <label>
+        Krark Thumbs:
+        <input type="number" id="krark_thumb_count" value="0">
+      </label>
+      <label>
+        Krark copies:
+        <input type="number" id="krarks_count" value="1">
+      </label>
+      <label>
+        Attempt return to hand BEFORE successful copy:
+        <input type="checkbox" id="krark_before" value="1">
+      </label>
+      <label>
+        Attempt return to hand AFTER successful copy:
+        <input type="checkbox" id="krark_after" value="1">
+      </label>
+      <button>
+        Go!
+      </button>
+      <label>
+        Number of spell copies:
+        <span id="krark_wins_count"></span>
+      </label>
+      <label>
+        Spell goes to hand?:
+        <span id="krark_hand"></span>
+      </label>
+    </form>
+
+    <script type="text/javascript">
+      //<![CDATA[
+      document.getElementById('frenetic_solver').onsubmit = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var k = Math.pow(2, parseInt(document.getElementById('frenetic_krark_thumb_count').value));
+        var f = parseInt(document.getElementById('frenetic_flips_count').value);
+        var w = 0;
+        for (var i = 0; i < f; i++) {
+          for (var j = 0; j < k; j++) {
+            if (Math.random() < 0.5) {
+              w = w + 1;
+              break;
+            }
+          }
+        }
+        document.getElementById('frenetic_wins_count').innerHTML = w.toString();
+      }
+
+      document.getElementById('okaun_solver').onsubmit = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var k = Math.pow(2, parseInt(document.getElementById('okaun_krark_thumb_count').value));
+        var winning = true;
+        var w = 0;
+        while (winning) {
+          var pre = w;
+          for (var j = 0; j < k; j++) {
+            if (Math.random() < 0.5) {
+              w = w + 1;
+              break;
+            }
+          }
+          if (pre == w) {
+            winning = false;
+          }
+        }
+
+        document.getElementById('okaun_wins_count').innerHTML = w.toString();
+        document.getElementById('okaun_multi').innerHTML = Math.pow(2, w);
+      }
+
+      document.getElementById('krark_solver').onsubmit = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var k = Math.pow(2, parseInt(document.getElementById('krark_thumb_count').value));
+        var s = parseInt(document.getElementById('krarks_count').value);
+        var returned_to_hand = false;
+        var successful_copy = false;
+        var attempt_before = document.getElementById('krark_before').checked
+        var attempt_after = document.getElementById('krark_after').checked
+
+        var w = 0;
+        for (var i = 0; i < s; i++) {
+          for (var j = 0; j < k; j++) {
+            if (returned_to_hand == false) {
+              if (successful_copy == false) {
+                if (attempt_before) {
+                  if (Math.random() < 0.5) {
+                    returned_to_hand = true;
+                    break;
+                  }
+                }
+              } else {
+                if (attempt_after) {
+                  if (Math.random() < 0.5) {
+                    returned_to_hand = true;
+                    break;
+                  }
+                }
+              }
+            }
+            if (Math.random() < 0.5) {
+              successful_copy = true
+              w = w + 1;
+              break;
+            }
+          }
+        }
+
+        document.getElementById('krark_wins_count').innerHTML = w.toString();
+        document.getElementById('krark_hand').innerHTML = (w < s) ? 'Yes' : 'No';
+      }
+    //]]>
+    </script>
+  </body>
+</html>
