@@ -16,89 +16,97 @@
 
       button {
         margin-bottom: 1rem;
+        margin-top: 1rem;
+      }
+      
+      div {
+        max-width: 25rem;
+        margin: auto;
       }
     </style>
   </head>
   <body>
-    <form id="frenetic_solver">
-      <h2>
-        Resolving Frenetic Efreet
-      </h2>
-      <label>
-        Krark Thumbs:
-        <input type="number" id="frenetic_krark_thumb_count" value="0">
-      </label>
-
-      <label>
-        Number of flips:
-        <input type="number" id="frenetic_flips_count" value="1">
-      </label>
-      <button>
-        Go!
-      </button>
-      <label>
-        Number of wins:
-        <span id="frenetic_wins_count"></span>
-      </label>
-    </form>
-    <hr>
-    <form id="okaun_solver">
-      <h2>
-        Resolving Okaun // Zndrsplt
-      </h2>
-      <label>
-        Krark Thumbs:
-        <input type="number" id="okaun_krark_thumb_count" value="0">
-      </label>
-      <button>
-        Go!
-      </button>
-      <label>
-        Number of wins (cards drawn):
-        <span id="okaun_wins_count"></span>
-      </label>
-      <label>
-        Okaun Power multiplier:
-        <span id="okaun_multi"></span>
-      </label>
-    </form>
-    <hr>
-    <form id="krark_solver">
-      <h2>
-        Resolving Krark // Sakashima
-      </h2>
-      <label>
-        Krark Thumbs:
-        <input type="number" id="krark_thumb_count" value="0">
-      </label>
-      <label>
-        Krark copies:
-        <input type="number" id="krarks_count" value="1">
-      </label>
-      <fieldset>
-        <legend>"Smart" features</legend>
+    <div>
+      <h1>Coin flip helper</h1>
+      <form id="frenetic_solver">
+        <h2>
+          Resolving Frenetic Efreet
+        </h2>
         <label>
-          Attempt return to hand BEFORE successful copy:
-          <input type="checkbox" id="krark_before" value="1">
+          Krark Thumbs:
+          <input type="number" id="frenetic_krark_thumb_count" value="0">
+        </label>
+
+        <label>
+          Number of flips:
+          <input type="number" id="frenetic_flips_count" value="1">
+        </label>
+        <button>
+          Go!
+        </button>
+        <label>
+          Number of wins:
+          <span id="frenetic_wins_count"></span>
+        </label>
+      </form>
+      <hr>
+      <form id="okaun_solver">
+        <h2>
+          Resolving Okaun // Zndrsplt
+        </h2>
+        <label>
+          Krark Thumbs:
+          <input type="number" id="okaun_krark_thumb_count" value="0">
+        </label>
+        <button>
+          Go!
+        </button>
+        <label>
+          Number of wins (cards drawn):
+          <span id="okaun_wins_count"></span>
         </label>
         <label>
-          Attempt return to hand AFTER successful copy:
-          <input type="checkbox" id="krark_after" value="1">
+          Okaun Power multiplier:
+          <span id="okaun_multi"></span>
         </label>
-      </fieldset>
-      <button>
-        Go!
-      </button>
-      <label>
-        Number of spell copies:
-        <span id="krark_wins_count"></span>
-      </label>
-      <label>
-        Spell goes to hand?:
-        <span id="krark_hand"></span>
-      </label>
-    </form>
-
+      </form>
+      <hr>
+      <form id="krark_solver">
+        <h2>
+          Resolving Krark // Sakashima
+        </h2>
+        <label>
+          Krark Thumbs:
+          <input type="number" id="krark_thumb_count" value="0">
+        </label>
+        <label>
+          Krark copies:
+          <input type="number" id="krarks_count" value="1">
+        </label>
+        <fieldset>
+          <legend>"Smart" features</legend>
+          <label>
+            Attempt return to hand BEFORE successful copy:
+            <input type="checkbox" id="krark_before" value="1">
+          </label>
+          <label>
+            Attempt return to hand AFTER successful copy:
+            <input type="checkbox" id="krark_after" value="1">
+          </label>
+        </fieldset>
+        <button>
+          Go!
+        </button>
+        <label>
+          Number of spell copies:
+          <span id="krark_wins_count"></span>
+        </label>
+        <label>
+          Original spell goes to hand?:
+          <span id="krark_hand"></span>
+        </label>
+      </form>
+    </div>
     <script type="text/javascript">
       //<![CDATA[
       document.getElementById('frenetic_solver').onsubmit = function (e) {
