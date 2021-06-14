@@ -23,6 +23,11 @@
         max-width: 25rem;
         margin: auto;
       }
+
+      small {
+        display: block;
+        font-size: 50%;
+      }
     </style>
   </head>
   <body>
@@ -53,6 +58,7 @@
       <form id="okaun_solver">
         <h2>
           Resolving Okaun // Zndrsplt
+          <small>and other effects that flip till you fail...</small>
         </h2>
         <label>
           Krark Thumbs:
@@ -130,6 +136,10 @@
         e.preventDefault();
         e.stopPropagation();
         var k = Math.pow(2, parseInt(document.getElementById('okaun_krark_thumb_count').value));
+        if (k>=5) {
+          document.getElementById('okaun_wins_count').innerHTML = "This is going to take a while to compute... (hint: it's going to be a very large number)";
+          document.getElementById('okaun_multi').innerHTML = "Infinity";
+        }
         var winning = true;
         var w = 0;
         while (winning) {
