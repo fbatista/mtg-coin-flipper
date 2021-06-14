@@ -140,24 +140,26 @@
           document.getElementById('okaun_wins_count').innerHTML = "This is going to take a while to compute... (hint: it's going to be a very large number)";
           document.getElementById('okaun_multi').innerHTML = "Infinity";
         }
-        var k = Math.pow(2, t);
-        var winning = true;
-        var w = 0;
-        while (winning) {
-          var pre = w;
-          for (var j = 0; j < k; j++) {
-            if (Math.random() < 0.5) {
-              w = w + 1;
-              break;
+        setTimeout(function() {
+          var k = Math.pow(2, t);
+          var winning = true;
+          var w = 0;
+          while (winning) {
+            var pre = w;
+            for (var j = 0; j < k; j++) {
+              if (Math.random() < 0.5) {
+                w = w + 1;
+                break;
+              }
+            }
+            if (pre == w) {
+              winning = false;
             }
           }
-          if (pre == w) {
-            winning = false;
-          }
-        }
 
-        document.getElementById('okaun_wins_count').innerHTML = w.toString();
-        document.getElementById('okaun_multi').innerHTML = Math.pow(2, w);
+          document.getElementById('okaun_wins_count').innerHTML = w.toString();
+          document.getElementById('okaun_multi').innerHTML = Math.pow(2, w);
+        }, 100)
       }
 
       document.getElementById('krark_solver').onsubmit = function (e) {
