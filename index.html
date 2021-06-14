@@ -135,11 +135,12 @@
       document.getElementById('okaun_solver').onsubmit = function (e) {
         e.preventDefault();
         e.stopPropagation();
-        var k = Math.pow(2, parseInt(document.getElementById('okaun_krark_thumb_count').value));
-        if (k>=5) {
+        var t = parseInt(document.getElementById('okaun_krark_thumb_count').value);
+        if (t >= 5) {
           document.getElementById('okaun_wins_count').innerHTML = "This is going to take a while to compute... (hint: it's going to be a very large number)";
           document.getElementById('okaun_multi').innerHTML = "Infinity";
         }
+        var k = Math.pow(2, t);
         var winning = true;
         var w = 0;
         while (winning) {
