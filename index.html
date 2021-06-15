@@ -18,7 +18,7 @@
         margin-bottom: 1rem;
         margin-top: 1rem;
       }
-      
+
       div {
         max-width: 25rem;
         margin: auto;
@@ -28,16 +28,24 @@
         display: block;
         font-size: 50%;
       }
-      
+
       input[type=number] {
-        width: 2.5rem; 
+        width: 2.5rem;
       }
-      
+
       input.wide {
-        width: 5rem; 
+        width: 5rem;
+      }
+
+      code {
+        overflow-wrap: break-word;
+        max-height: 10rem;
+        overflow-y: auto;
+        display: block;
       }
     </style>
   </head>
+
   <body>
     <div>
       <h1>Coin flip helper</h1>
@@ -54,6 +62,7 @@
           Number of flips:
           <input class="wide" type="number" id="frenetic_flips_count" value="1" />
         </label>
+        <label>Verbose mode <input type="checkbox" id="frenetic_verbose" /></label>
         <button>
           Go!
         </button>
@@ -72,23 +81,24 @@
           Krark Thumbs:
           <input type="number" id="okaun_krark_thumb_count" value="0" />
         </label>
-          <fieldset>
+        <fieldset>
           <legend>"Smart" features</legend>
           <label>
             Attempt stop after <input type="number" id="okaun_max" value="10" /> wins:
             <input type="checkbox" id="okaun_stop" value="1" />
           </label>
         </fieldset>
+        <label>Verbose mode <input type="checkbox" id="okaun_verbose" /></label>
         <button>
           Go!
         </button>
         <label>
-          Number of wins (cards drawn):
-          <span id="okaun_wins_count"></span>
-        </label>
-        <label>
           Okaun Power multiplier:
           <span id="okaun_multi"></span>
+        </label>
+        <label>
+          Number of wins (cards drawn):
+          <span id="okaun_wins_count"></span>
         </label>
       </form>
       <hr>
@@ -115,16 +125,17 @@
             <input type="checkbox" id="krark_after" value="1" />
           </label>
         </fieldset>
+        <label>Verbose mode <input type="checkbox" id="krark_verbose" /></label>
         <button>
           Go!
         </button>
         <label>
-          Number of spell copies:
-          <span id="krark_wins_count"></span>
-        </label>
-        <label>
           Original spell goes to hand?:
           <span id="krark_hand"></span>
+        </label>
+        <label>
+          Number of spell copies:
+          <span id="krark_wins_count"></span>
         </label>
       </form>
     </div>
@@ -136,15 +147,33 @@
         var k = Math.pow(2, parseInt(document.getElementById('frenetic_krark_thumb_count').value));
         var f = parseInt(document.getElementById('frenetic_flips_count').value);
         var w = 0;
+        var verbose = document.getElementById('frenetic_verbose').checked;
+        var output = [];
         for (var i = 0; i < f; i++) {
           for (var j = 0; j < k; j++) {
             if (Math.random() < 0.5) {
               w = w + 1;
+              if (verbose) {
+                output.push('H');
+              }
               break;
             }
+            if (verbose) {
+              output.push('T');
+            }
+          }
+          if (verbose) {
+            output.push(' | ');
           }
         }
-        document.getElementById('frenetic_wins_count').innerHTML = w.toString();
+        if (verbose) {
+          document.getElementById('frenetic_wins_count').innerHTML = (
+            w.toString() + '<br/>' +
+            '<code>' + output.join('') + '</code>'
+          );
+        } else {
+          document.getElementById('frenetic_wins_count').innerHTML = w.toString();
+        }
       }
 
       document.getElementById('okaun_solver').onsubmit = function (e) {
@@ -153,11 +182,13 @@
         var t = parseInt(document.getElementById('okaun_krark_thumb_count').value);
         var max = parseInt(document.getElementById('okaun_max').value);
         var stop_at_max = document.getElementById('okaun_stop').checked;
+        var verbose = document.getElementById('okaun_verbose').checked;
+        var output = [];
         if (t >= 5) {
           document.getElementById('okaun_wins_count').innerHTML = "This is going to take a while to compute... (hint: it's going to be a very large number)";
           document.getElementById('okaun_multi').innerHTML = "Infinity";
         }
-        setTimeout(function() {
+        setTimeout(function () {
           var k = Math.pow(2, t);
           var winning = true;
           var w = 0;
@@ -165,27 +196,46 @@
             var pre = w;
             for (var j = 0; j < k; j++) {
               if (stop_at_max && w >= max) {
-                 if (Math.random() < 0.5) {
-                   break;
-                 } else {
-                   if (j == (k - 1)) {
-                     w = w + 1;
-                   }
-                   continue;
-                 }
+                if (Math.random() < 0.5) {
+                  if (verbose) {
+                    output.push('T');
+                  }
+                  break;
+                } else {
+                  if (j == (k - 1)) {
+                    w = w + 1;
+                  }
+                  if (verbose) {
+                    output.push('H');
+                  }
+                  continue;
+                }
               }
               if (Math.random() < 0.5) {
                 w = w + 1;
+                if (verbose) {
+                  output.push('H');
+                }
                 break;
               }
             }
             if (pre == w) {
               winning = false;
             }
+            if (verbose) {
+              output.push(' | ');
+            }
           }
-
-          document.getElementById('okaun_wins_count').innerHTML = w.toString();
           document.getElementById('okaun_multi').innerHTML = Math.pow(2, w);
+
+          if (verbose) {
+            document.getElementById('okaun_wins_count').innerHTML = (
+              w.toString() + '<br/>' +
+              '<code>' + output.join('') + '</code>'
+            );
+          } else {
+            document.getElementById('okaun_wins_count').innerHTML = w.toString();
+          }
         }, 100)
       }
 
@@ -198,6 +248,8 @@
         var successful_copy = false;
         var attempt_before = document.getElementById('krark_before').checked
         var attempt_after = document.getElementById('krark_after').checked
+        var verbose = document.getElementById('okaun_verbose').checked;
+        var output = [];
 
         var w = 0;
         for (var i = 0; i < s; i++) {
@@ -207,10 +259,16 @@
                 if (attempt_before) {
                   if (Math.random() < 0.5) {
                     returned_to_hand = true;
+                    if (verbose) {
+                      output.push('T');
+                    }
                     break;
                   } else {
                     if (j == (k - 1)) {
                       w = w + 1;
+                    }
+                    if (verbose) {
+                      output.push('H');
                     }
                     continue;
                   }
@@ -219,10 +277,16 @@
                 if (attempt_after) {
                   if (Math.random() < 0.5) {
                     returned_to_hand = true;
+                    if (verbose) {
+                      output.push('T');
+                    }
                     break;
                   } else {
                     if (j == (k - 1)) {
                       w = w + 1;
+                    }
+                    if (verbose) {
+                      output.push('H');
                     }
                     continue;
                   }
@@ -232,15 +296,28 @@
             if (Math.random() < 0.5) {
               successful_copy = true
               w = w + 1;
+              if (verbose) {
+                output.push('H');
+              }
               break;
             }
           }
+          if (verbose) {
+            output.push(' | ');
+          }
         }
-
-        document.getElementById('krark_wins_count').innerHTML = w.toString();
         document.getElementById('krark_hand').innerHTML = (w < s) ? 'Yes' : 'No';
+
+        if (verbose) {
+          document.getElementById('krark_wins_count').innerHTML = (
+            w.toString() + '<br/>' +
+            '<code>' + output.join('') + '</code>'
+          );
+        } else {
+          document.getElementById('krark_wins_count').innerHTML = w.toString();
+        }
       }
-    //]]>
+      //]]>
     </script>
   </body>
 </html>
