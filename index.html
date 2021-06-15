@@ -28,6 +28,14 @@
         display: block;
         font-size: 50%;
       }
+      
+      input[type=number] {
+        width: 2.5rem; 
+      }
+      
+      input.wide {
+        width: 5rem; 
+      }
     </style>
   </head>
   <body>
@@ -39,12 +47,12 @@
         </h2>
         <label>
           Krark Thumbs:
-          <input type="number" id="frenetic_krark_thumb_count" value="0">
+          <input type="number" id="frenetic_krark_thumb_count" value="0" />
         </label>
 
         <label>
           Number of flips:
-          <input type="number" id="frenetic_flips_count" value="1">
+          <input class="wide" type="number" id="frenetic_flips_count" value="1" />
         </label>
         <button>
           Go!
@@ -62,8 +70,15 @@
         </h2>
         <label>
           Krark Thumbs:
-          <input type="number" id="okaun_krark_thumb_count" value="0">
+          <input type="number" id="okaun_krark_thumb_count" value="0" />
         </label>
+          <fieldset>
+          <legend>"Smart" features</legend>
+          <label>
+            Attempt stop after <input type="number" id="okaun_max" value="10" /> wins:
+            <input type="checkbox" id="okaun_stop" value="1" />
+          </label>
+        </fieldset>
         <button>
           Go!
         </button>
@@ -83,21 +98,21 @@
         </h2>
         <label>
           Krark Thumbs:
-          <input type="number" id="krark_thumb_count" value="0">
+          <input type="number" id="krark_thumb_count" value="0" />
         </label>
         <label>
           Krark copies:
-          <input type="number" id="krarks_count" value="1">
+          <input type="number" id="krarks_count" value="1" />
         </label>
         <fieldset>
           <legend>"Smart" features</legend>
           <label>
             Attempt return to hand BEFORE successful copy:
-            <input type="checkbox" id="krark_before" value="1">
+            <input type="checkbox" id="krark_before" value="1" />
           </label>
           <label>
             Attempt return to hand AFTER successful copy:
-            <input type="checkbox" id="krark_after" value="1">
+            <input type="checkbox" id="krark_after" value="1" />
           </label>
         </fieldset>
         <button>
@@ -136,6 +151,8 @@
         e.preventDefault();
         e.stopPropagation();
         var t = parseInt(document.getElementById('okaun_krark_thumb_count').value);
+        var max = parseInt(document.getElementById('okaun_max').value);
+        var stop_at_max = document.getElementById('okaun_stop').checked;
         if (t >= 5) {
           document.getElementById('okaun_wins_count').innerHTML = "This is going to take a while to compute... (hint: it's going to be a very large number)";
           document.getElementById('okaun_multi').innerHTML = "Infinity";
@@ -147,6 +164,16 @@
           while (winning) {
             var pre = w;
             for (var j = 0; j < k; j++) {
+              if (stop_at_max && w >= max) {
+                 if (Math.random() < 0.5) {
+                   break;
+                 } else {
+                   if (j == (k - 1)) {
+                     w = w + 1;
+                   }
+                   continue;
+                 }
+              }
               if (Math.random() < 0.5) {
                 w = w + 1;
                 break;
