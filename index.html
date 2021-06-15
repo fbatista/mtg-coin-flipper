@@ -162,7 +162,7 @@
               output.push('T');
             }
           }
-          if (verbose) {
+          if (verbose && i != (f - 1)) {
             output.push(' | ');
           }
         }
@@ -225,7 +225,7 @@
             if (pre == w) {
               winning = false;
             }
-            if (verbose) {
+            if (verbose && winning) {
               output.push(' | ');
             }
           }
@@ -308,7 +308,7 @@
               output.push('T');
             }
           }
-          if (verbose) {
+          if (verbose && i != (s - 1)) {
             output.push(' | ');
           }
         }
