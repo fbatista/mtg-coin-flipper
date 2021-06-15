@@ -7,20 +7,35 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar&family=Roboto&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <style id="compiled-css" type="text/css">
+      html {
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      h1, h2 {
+        font-family: 'Eczar', serif;
+      }
+
       label {
         display: block;
         margin-bottom: 1rem;
       }
 
+      fieldset { 
+        padding-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
       button {
         margin-bottom: 1rem;
-        margin-top: 1rem;
       }
 
       div {
-        max-width: 25rem;
+        max-width: 26rem;
         margin: auto;
       }
 
@@ -33,6 +48,14 @@
         width: 2.5rem;
       }
 
+      input[type=checkbox] { 
+        vertical-align: middle;
+      }
+
+      input, button {
+        font-size: 100%;
+      }
+
       input.wide {
         width: 5rem;
       }
@@ -42,6 +65,7 @@
         max-height: 10rem;
         overflow-y: auto;
         display: block;
+        font-family: 'Share Tech Mono', monospace;
       }
     </style>
   </head>
@@ -62,7 +86,7 @@
           Number of flips:
           <input class="wide" type="number" id="frenetic_flips_count" value="1" />
         </label>
-        <label>Verbose mode <input type="checkbox" id="frenetic_verbose" /></label>
+        <label>Verbose mode: <input type="checkbox" id="frenetic_verbose" /></label>
         <button>
           Go!
         </button>
@@ -88,7 +112,7 @@
             <input type="checkbox" id="okaun_stop" value="1" />
           </label>
         </fieldset>
-        <label>Verbose mode <input type="checkbox" id="okaun_verbose" /></label>
+        <label>Verbose mode: <input type="checkbox" id="okaun_verbose" /></label>
         <button>
           Go!
         </button>
@@ -125,7 +149,7 @@
             <input type="checkbox" id="krark_after" value="1" />
           </label>
         </fieldset>
-        <label>Verbose mode <input type="checkbox" id="krark_verbose" /></label>
+        <label>Verbose mode: <input type="checkbox" id="krark_verbose" /></label>
         <button>
           Go!
         </button>
