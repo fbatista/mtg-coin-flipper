@@ -461,6 +461,23 @@
           current_mana = current_mana + mana_sk;
           for (var i = 0; i < s; i++) {
             for (var j = 0; j < k; j++) {
+              if(!returned_to_hand && current_mana >= desired_mana) {
+                if (Math.random() < 0.5) {
+                  returned_to_hand = true;
+                  if (verbose) {
+                    output.push('T');
+                  }
+                  break;
+                } else {
+                  if (j == (k - 1)) {
+                    w = w + 1;
+                  }
+                  if (verbose) {
+                    output.push('H');
+                  }
+                  continue;
+                }
+              }
               if (Math.random() < 0.5) {
                 w = w + 1;
                 if (verbose) {
@@ -481,7 +498,7 @@
             }
           }
           if (returned_to_hand) {
-            if (current_mana >= mana_in) {
+            if (current_mana >= mana_in && current_mana < desired_mana) {
               current_mana = current_mana - mana_in;
               returned_to_hand = false;
               if (verbose) {
