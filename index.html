@@ -90,9 +90,7 @@
           <input class="wide" type="number" inputmode="numeric" id="frenetic_flips_count" value="1" />
         </label>
         <label>Verbose mode: <input type="checkbox" id="frenetic_verbose" /></label>
-        <button>
-          Go!
-        </button>
+        <input type="reset" /> <button>Go!</button>
         <label>
           Number of wins:
           <span id="frenetic_wins_count"></span>
@@ -116,9 +114,7 @@
           </label>
         </fieldset>
         <label>Verbose mode: <input type="checkbox" id="okaun_verbose" /></label>
-        <button>
-          Go!
-        </button>
+        <input type="reset" /> <button>Go!</button>
         <label>
           Okaun Power multiplier:
           <span id="okaun_multi"></span>
@@ -170,6 +166,9 @@
     </div>
     <script type="text/javascript">
       //<![CDATA[
+      document.getElementById('frenetic_solver').onreset = function(e) {
+        document.getElementById('frenetic_wins_count').innerHTML = '';
+      };
       document.getElementById('frenetic_solver').onsubmit = function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -203,8 +202,12 @@
         } else {
           document.getElementById('frenetic_wins_count').innerHTML = w.toString();
         }
-      }
+      };
 
+      document.getElementById('okaun_solver').onreset = function(e) {
+        document.getElementById('okaun_wins_count').innerHTML = '';
+        document.getElementById('okaun_multi').innerHTML = '';
+      };
       document.getElementById('okaun_solver').onsubmit = function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -269,8 +272,12 @@
             document.getElementById('okaun_wins_count').innerHTML = w.toString();
           }
         }, 100)
-      }
+      };
 
+      document.getElementById('krark_solver').onreset = function(e) {
+        document.getElementById('krark_hand').innerHTML = '';
+        document.getElementById('krark_wins_count').innerHTML = '';
+      };
       document.getElementById('krark_solver').onsubmit = function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -369,7 +376,7 @@
         } else {
           document.getElementById('krark_wins_count').innerHTML = w.toString();
         }
-      }
+      };
       //]]>
     </script>
   </body>
