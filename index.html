@@ -167,7 +167,7 @@
           <span id="krark_wins_count"></span>
         </label>
       </form>
-
+      <hr />
       <form id="mana_solver">
         <h2>
           Mana generator
@@ -450,7 +450,7 @@
         var mana_out = parseInt(document.getElementById('mana_out').value);
         var mana_in = parseInt(document.getElementById('mana_in').value);
         var desired_mana = parseInt(document.getElementById('desired_mana').value);
-        var verbose = document.getElementById('krark_verbose').checked;
+        var verbose = document.getElementById('mana_verbose').checked;
         var output = [];
 
         var current_mana = 0;
@@ -495,7 +495,7 @@
             over = true;
           }
         }
-        document.getElementById('krark_hand').innerHTML = (w < s) ? 'Yes' : 'No';
+        document.getElementById('mana_hand').innerHTML = (w < s) ? 'Yes' : 'No';
 
         if (verbose) {
           document.getElementById('mana_generated').innerHTML = (
