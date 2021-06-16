@@ -456,7 +456,7 @@
         var current_mana = 0;
         var returned_to_hand = false;
         var over = false;
-        while(current_mana < desired_mana || !over) {
+        while(current_mana < desired_mana && !over) {
           var w = 0;
           current_mana = current_mana + mana_sk;
           for (var i = 0; i < s; i++) {
