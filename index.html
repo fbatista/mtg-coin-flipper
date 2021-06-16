@@ -145,23 +145,25 @@
           <legend>"Smart" features</legend>
           <label>
             Attempt return to hand BEFORE successful copy:
-            <input type="checkbox" id="krark_before" value="1" />
+            <input type="radio" id="krark_before" name="krark_bounce" value="1" />
           </label>
           <label>
             Attempt return to hand AFTER successful copy:
-            <input type="checkbox" id="krark_after" value="1" />
+            <input type="radio" id="krark_after" name="krark_bounce" value="1" />
+          </label>
+          <label>
+            Attempt stop after <input type="number" inputmode="numeric" id="krark_max" value="10" /> wins:
+            <input type="checkbox" id="krark_stop" value="1" />
           </label>
         </fieldset>
         <label>Verbose mode: <input type="checkbox" id="krark_verbose" /></label>
-        <button>
-          Go!
-        </button>
+        <input type="reset" /> <button>Go!</button>
         <label>
           Original spell goes to hand?:
           <span id="krark_hand"></span>
         </label>
         <label>
-          Number of spell copies:
+          Number of wins (spell copies):
           <span id="krark_wins_count"></span>
         </label>
       </form>
@@ -278,7 +280,9 @@
         var successful_copy = false;
         var attempt_before = document.getElementById('krark_before').checked
         var attempt_after = document.getElementById('krark_after').checked
-        var verbose = document.getElementById('okaun_verbose').checked;
+        var max = parseInt(document.getElementById('krark_max').value);
+        var stop_at_max = document.getElementById('krark_stop').checked;
+        var verbose = document.getElementById('krark_verbose').checked;
         var output = [];
 
         var w = 0;
@@ -321,6 +325,22 @@
                     continue;
                   }
                 }
+              }
+            }
+            if (stop_at_max && w >= max) {
+              if (Math.random() < 0.5) {
+                if (verbose) {
+                  output.push('T');
+                }
+                break;
+              } else {
+                if (j == (k - 1)) {
+                  w = w + 1;
+                }
+                if (verbose) {
+                  output.push('H');
+                }
+                continue;
               }
             }
             if (Math.random() < 0.5) {
