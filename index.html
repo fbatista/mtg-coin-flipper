@@ -107,7 +107,7 @@
           <input type="number" inputmode="numeric" id="okaun_krark_thumb_count" value="0" />
         </label>
         <fieldset>
-          <legend>"Smart" features</legend>
+          <legend>Strategy parameters</legend>
           <label>
             Attempt stop after <input type="number" inputmode="numeric" id="okaun_max" value="10" /> wins:
             <input type="checkbox" id="okaun_stop" value="1" />
@@ -142,7 +142,7 @@
           <input type="number" inputmode="numeric" id="krarks_enhancers" value="0" />
         </label>
         <fieldset>
-          <legend>"Smart" features</legend>
+          <legend>Strategy parameters</legend>
           <label>
             Attempt return to hand BEFORE successful copy:
             <input type="radio" id="krark_before" name="krark_bounce" value="1" />
@@ -210,6 +210,17 @@
             <input type="number" inputmode="numeric" id="mana_ts" value="0" />
           </label>
         </fieldset>
+        <fieldset>
+          <legend>Strategy parameters</legend>
+          <label>
+            Attempt return to hand BEFORE successful copy:
+            <input type="radio" id="mana_before" name="mana_bounce" checked value="1" />
+          </label>
+          <label>
+            Attempt return to hand AFTER successful copy:
+            <input type="radio" id="mana_after" name="mana_bounce" value="1" />
+          </label>
+        </fieldset>
         <label>Verbose mode: <input type="checkbox" id="mana_verbose" /></label>
         <input type="reset" /> <button>Go!</button>
         <label>
@@ -221,6 +232,10 @@
           <span id="mana_generated"></span>
         </label>
       </form>
+      <hr/>
+      <p>
+        Check out the <a href="https://github.com/fbatista/mtg-coin-flipper">github repository</a> for this tool and feel free to reach out to <a href="https://github.com/fbatista"></a>me</a>.
+      </p>
     </div>
     <script type="text/javascript">
       //<![CDATA[
@@ -438,6 +453,10 @@
         }
       };
 
+      document.getElementById('mana_solver').onreset = function(e) {
+        document.getElementById('mana_hand').innerHTML = '';
+        document.getElementById('mana_generated').innerHTML = '';
+      };
       document.getElementById('mana_solver').onsubmit = function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -450,6 +469,8 @@
         var mana_out = parseInt(document.getElementById('mana_out').value);
         var mana_in = parseInt(document.getElementById('mana_in').value);
         var desired_mana = parseInt(document.getElementById('desired_mana').value);
+        var attempt_before = document.getElementById('mana_before').checked
+        var attempt_after = document.getElementById('mana_after').checked
         var verbose = document.getElementById('mana_verbose').checked;
         var output = [];
 
@@ -461,7 +482,7 @@
           current_mana = current_mana + mana_sk;
           for (var i = 0; i < s; i++) {
             for (var j = 0; j < k; j++) {
-              if(!returned_to_hand && current_mana >= desired_mana) {
+              if(!returned_to_hand && (current_mana >= desired_mana || (attempt_before && w == 0) || (attempt_after && w >= 1))) {
                 if (Math.random() < 0.5) {
                   returned_to_hand = true;
                   if (verbose) {
