@@ -471,6 +471,7 @@
                 } else {
                   if (j == (k - 1)) {
                     w = w + 1;
+                    current_mana = current_mana + mana_out + mana_sk + 2 * mana_ts;
                   }
                   if (verbose) {
                     output.push('H');
@@ -480,9 +481,9 @@
               }
               if (Math.random() < 0.5) {
                 w = w + 1;
+                current_mana = current_mana + mana_out + mana_sk + 2 * mana_ts;
                 if (verbose) {
                   output.push('H');
-                  current_mana = current_mana + mana_out + mana_sk + 2 * mana_ts;
                 }
                 break;
               }
