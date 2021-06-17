@@ -1,0 +1,56 @@
+html {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2 {
+  font-family: 'Eczar', serif;
+}
+
+label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+fieldset { 
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-bottom: 1rem;
+}
+
+div {
+  max-width: 26rem;
+  margin: auto;
+}
+
+small {
+  display: block;
+  font-size: 50%;
+}
+
+input[type=number] {
+  width: 2.5rem;
+}
+
+input[type=checkbox], input[type=radio] { 
+  vertical-align: middle;
+}
+
+input, button {
+  font-size: 100%;
+}
+
+input.wide {
+  width: 5rem;
+}
+
+code {
+  overflow-wrap: break-word;
+  max-height: 10rem;
+  overflow-y: auto;
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+}
