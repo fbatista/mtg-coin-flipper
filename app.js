@@ -57,6 +57,51 @@
   }
 
   var initApplication = function() {
+    document.getElementById('competitive_solver').onreset = function(e) {
+      document.getElementById('competitive_wins_count').innerHTML = '';
+    };
+    document.getElementById('competitive_solver').onsubmit = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var f = parseInt(document.getElementById('competitive_flips_count').value);
+      var w = 0;
+      var verbose = document.getElementById('competitive_verbose').checked;
+      var output = [];
+      if (f > 1000) {
+        w = coinflip(f);
+      } else {
+        for (var i = 0; i < f; i++) {
+          if (Math.random() < 0.5) {
+            w = w + 1;
+            if (verbose) {
+              output.push('H');
+            }
+            break;
+          }
+          if (verbose) {
+            output.push('T');
+          }
+          if (verbose && i != (f - 1)) {
+            output.push(' | ');
+          }
+        }
+      }
+      
+      if (verbose && f <= 1000) {
+        document.getElementById('competitive_wins_count').innerHTML = (
+          w.toString() + '<br/>' +
+          '<code>' + output.join('') + '</code>'
+        );
+      } else if (verbose && f > 1000) {
+        document.getElementById('competitive_wins_count').innerHTML = (
+          w.toString() + '<br/>' +
+          '<code>Too many flips to display all results!</code>'
+        );
+      } else {
+        document.getElementById('competitive_wins_count').innerHTML = w.toString();
+      }
+    }
+
     document.getElementById('frenetic_solver').onreset = function(e) {
       document.getElementById('frenetic_wins_count').innerHTML = '';
     };

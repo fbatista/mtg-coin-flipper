@@ -20,97 +20,124 @@
   <body>
     <div>
       <h1>Coin flip helper</h1>
-      <form id="frenetic_solver">
-        <h2>
-          Resolving Frenetic Efreet
-        </h2>
-        <label>
-          Krark Thumbs:
-          <input type="number" inputmode="numeric" id="frenetic_krark_thumb_count" value="0" />
-        </label>
-
-        <label>
-          Number of flips:
-          <input class="wide" type="number" inputmode="numeric" id="frenetic_flips_count" value="1" />
-        </label>
-        <label>Verbose mode: <input type="checkbox" id="frenetic_verbose" /></label>
-        <input type="reset" /> <button>Go!</button>
-        <label>
-          Number of wins:
-          <span id="frenetic_wins_count"></span>
-        </label>
-      </form>
-      <hr>
-      <form id="okaun_solver">
-        <h2>
-          Resolving Okaun // Zndrsplt
-          <small>and other effects that flip till you fail...</small>
-        </h2>
-        <label>
-          Krark Thumbs:
-          <input type="number" inputmode="numeric" id="okaun_krark_thumb_count" value="0" />
-        </label>
-        <fieldset>
-          <legend>Strategy parameters</legend>
-          <label>
-            Attempt stop after <input type="number" inputmode="numeric" id="okaun_max" value="10" /> wins:
-            <input type="checkbox" id="okaun_stop" value="1" />
-          </label>
-        </fieldset>
-        <label>Verbose mode: <input type="checkbox" id="okaun_verbose" /></label>
-        <input type="reset" /> <button>Go!</button>
-        <label>
-          Okaun Power multiplier:
-          <span id="okaun_multi"></span>
-        </label>
-        <label>
-          Number of wins (cards drawn):
-          <span id="okaun_wins_count"></span>
-        </label>
-      </form>
-      <hr>
-      <form id="krark_solver">
-        <h2>
-          Resolving Krark // Sakashima
-        </h2>
-        <label>
-          Krark Thumbs:
-          <input type="number" inputmode="numeric" id="krark_thumb_count" value="0" />
-        </label>
-        <label>
-          Krark clones:
-          <input type="number" inputmode="numeric" id="krarks_count" value="1" />
-        </label>
-        <label>
-          Trigger enhancers (Veyran, Prodigy):
-          <input type="number" inputmode="numeric" id="krarks_enhancers" value="0" />
-        </label>
-        <fieldset>
-          <legend>Strategy parameters</legend>
-          <label>
-            Attempt return to hand BEFORE successful copy:
-            <input type="radio" id="krark_before" name="krark_bounce" value="1" />
-          </label>
-          <label>
-            Attempt return to hand AFTER successful copy:
-            <input type="radio" id="krark_after" name="krark_bounce" value="1" />
-          </label>
-          <label>
-            Attempt stop after <input type="number" inputmode="numeric" id="krark_max" value="10" /> wins:
-            <input type="checkbox" id="krark_stop" value="1" />
-          </label>
-        </fieldset>
-        <label>Verbose mode: <input type="checkbox" id="krark_verbose" /></label>
-        <input type="reset" /> <button>Go!</button>
-        <label>
-          Original spell goes to hand?:
-          <span id="krark_hand"></span>
-        </label>
-        <label>
-          Number of wins (spell copies):
-          <span id="krark_wins_count"></span>
-        </label>
-      </form>
+      <p><em>Choose a rules enforcement level:</em></p>
+      <details>
+        <summary>Competitive REL</summary>
+        <div>
+          <form id="competitive_solver">
+            <h2>
+              Resolving Coin Flips
+            </h2>
+            <label>
+              Number of coin flips:
+              <input class="wide" type="number" inputmode="numeric" id="competitive_flips_count" value="1" />
+            </label>
+            <label>Verbose mode: <input type="checkbox" id="competitive_verbose" /></label>
+            <input type="reset" /> <button>Go!</button>
+            <label>
+              Number of wins:
+              <span id="competitive_wins_count"></span>
+            </label>
+          </form>
+        </div>
+      </details>
+      <details>
+        <summary>Regular REL</summary>
+        <div>
+          <form id="frenetic_solver">
+            <h2>
+              Resolving Frenetic Efreet
+            </h2>
+            <label>
+              Krark Thumbs:
+              <input type="number" inputmode="numeric" id="frenetic_krark_thumb_count" value="0" />
+            </label>
+    
+            <label>
+              Number of flips:
+              <input class="wide" type="number" inputmode="numeric" id="frenetic_flips_count" value="1" />
+            </label>
+            <label>Verbose mode: <input type="checkbox" id="frenetic_verbose" /></label>
+            <input type="reset" /> <button>Go!</button>
+            <label>
+              Number of wins:
+              <span id="frenetic_wins_count"></span>
+            </label>
+          </form>
+          <hr>
+          <form id="okaun_solver">
+            <h2>
+              Resolving Okaun // Zndrsplt
+              <small>and other effects that flip till you fail...</small>
+            </h2>
+            <label>
+              Krark Thumbs:
+              <input type="number" inputmode="numeric" id="okaun_krark_thumb_count" value="0" />
+            </label>
+            <fieldset>
+              <legend>Strategy parameters</legend>
+              <label>
+                Attempt stop after <input type="number" inputmode="numeric" id="okaun_max" value="10" /> wins:
+                <input type="checkbox" id="okaun_stop" value="1" />
+              </label>
+            </fieldset>
+            <label>Verbose mode: <input type="checkbox" id="okaun_verbose" /></label>
+            <input type="reset" /> <button>Go!</button>
+            <label>
+              Okaun Power multiplier:
+              <span id="okaun_multi"></span>
+            </label>
+            <label>
+              Number of wins (cards drawn):
+              <span id="okaun_wins_count"></span>
+            </label>
+          </form>
+          <hr>
+          <form id="krark_solver">
+            <h2>
+              Resolving Krark // Sakashima
+            </h2>
+            <label>
+              Krark Thumbs:
+              <input type="number" inputmode="numeric" id="krark_thumb_count" value="0" />
+            </label>
+            <label>
+              Krark clones:
+              <input type="number" inputmode="numeric" id="krarks_count" value="1" />
+            </label>
+            <label>
+              Trigger enhancers (Veyran, Prodigy):
+              <input type="number" inputmode="numeric" id="krarks_enhancers" value="0" />
+            </label>
+            <fieldset>
+              <legend>Strategy parameters</legend>
+              <label>
+                Attempt return to hand BEFORE successful copy:
+                <input type="radio" id="krark_before" name="krark_bounce" value="1" />
+              </label>
+              <label>
+                Attempt return to hand AFTER successful copy:
+                <input type="radio" id="krark_after" name="krark_bounce" value="1" />
+              </label>
+              <label>
+                Attempt stop after <input type="number" inputmode="numeric" id="krark_max" value="10" /> wins:
+                <input type="checkbox" id="krark_stop" value="1" />
+              </label>
+            </fieldset>
+            <label>Verbose mode: <input type="checkbox" id="krark_verbose" /></label>
+            <input type="reset" /> <button>Go!</button>
+            <label>
+              Original spell goes to hand?:
+              <span id="krark_hand"></span>
+            </label>
+            <label>
+              Number of wins (spell copies):
+              <span id="krark_wins_count"></span>
+            </label>
+          </form>
+        </div>
+      </details>
+      
       <hr />
       <form id="mana_solver">
         <h2>
