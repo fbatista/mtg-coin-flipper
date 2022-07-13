@@ -135,75 +135,76 @@
               <span id="krark_wins_count"></span>
             </label>
           </form>
+          <hr />
+          <form id="mana_solver">
+            <h2>
+              Mana generator
+            </h2>
+            <label>
+              Desired mana:
+              <input type="number" inputmode="numeric" id="desired_mana" value="5" />
+            </label>
+            <fieldset>
+              <legend>Krark parameters</legend>
+              <label>
+                Krark Thumbs:
+                <input type="number" inputmode="numeric" id="mana_thumb" value="0" />
+              </label>
+              <label>
+                Krark clones:
+                <input type="number" inputmode="numeric" id="mana_krarks" value="1" />
+              </label>
+              <label>
+                Trigger enhancers (Veyran, Prodigy):
+                <input type="number" inputmode="numeric" id="mana_krarks_enhancers" value="0" />
+              </label>
+            </fieldset>
+            <fieldset>
+              <legend>Ritual parameters</legend>
+              <label>
+                Ritual cost:
+                <input type="number" inputmode="numeric" id="mana_in" value="1" />
+              </label>
+              <label>
+                Ritual produces:
+                <input type="number" inputmode="numeric" id="mana_out" value="2" />
+              </label>
+              <label>
+                Storm-Kiln Artists:
+                <input type="number" inputmode="numeric" id="mana_sk" value="0" />
+              </label>
+              <label>
+                Tavern Scoundrels:
+                <input type="number" inputmode="numeric" id="mana_ts" value="0" />
+              </label>
+            </fieldset>
+            <fieldset>
+              <legend>Strategy parameters</legend>
+              <label>
+                Attempt return to hand BEFORE successful copy:
+                <input type="radio" id="mana_before" name="mana_bounce" checked value="1" />
+              </label>
+              <label>
+                Attempt return to hand AFTER successful copy:
+                <input type="radio" id="mana_after" name="mana_bounce" value="1" />
+              </label>
+            </fieldset>
+            <label>Verbose mode: <input type="checkbox" id="mana_verbose" /></label>
+            <input type="reset" /> <button>Go!</button>
+            <label>
+              Original spell goes to hand?:
+              <span id="mana_hand"></span>
+            </label>
+            <label>
+              Mana generated (treasures included):
+              <span id="mana_generated"></span>
+            </label>
+          </form>
         </div>
       </details>
-      
-      <hr />
-      <form id="mana_solver">
-        <h2>
-          Mana generator
-        </h2>
-        <label>
-          Desired mana:
-          <input type="number" inputmode="numeric" id="desired_mana" value="5" />
-        </label>
-        <fieldset>
-          <legend>Krark parameters</legend>
-          <label>
-            Krark Thumbs:
-            <input type="number" inputmode="numeric" id="mana_thumb" value="0" />
-          </label>
-          <label>
-            Krark clones:
-            <input type="number" inputmode="numeric" id="mana_krarks" value="1" />
-          </label>
-          <label>
-            Trigger enhancers (Veyran, Prodigy):
-            <input type="number" inputmode="numeric" id="mana_krarks_enhancers" value="0" />
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>Ritual parameters</legend>
-          <label>
-            Ritual cost:
-            <input type="number" inputmode="numeric" id="mana_in" value="1" />
-          </label>
-          <label>
-            Ritual produces:
-            <input type="number" inputmode="numeric" id="mana_out" value="2" />
-          </label>
-          <label>
-            Storm-Kiln Artists:
-            <input type="number" inputmode="numeric" id="mana_sk" value="0" />
-          </label>
-          <label>
-            Tavern Scoundrels:
-            <input type="number" inputmode="numeric" id="mana_ts" value="0" />
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>Strategy parameters</legend>
-          <label>
-            Attempt return to hand BEFORE successful copy:
-            <input type="radio" id="mana_before" name="mana_bounce" checked value="1" />
-          </label>
-          <label>
-            Attempt return to hand AFTER successful copy:
-            <input type="radio" id="mana_after" name="mana_bounce" value="1" />
-          </label>
-        </fieldset>
-        <label>Verbose mode: <input type="checkbox" id="mana_verbose" /></label>
-        <input type="reset" /> <button>Go!</button>
-        <label>
-          Original spell goes to hand?:
-          <span id="mana_hand"></span>
-        </label>
-        <label>
-          Mana generated (treasures included):
-          <span id="mana_generated"></span>
-        </label>
-      </form>
+
       <hr/>
+
       <p>
         Check out the <a href="https://github.com/fbatista/mtg-coin-flipper">github repository</a> for this tool and feel free to reach out to <a href="https://github.com/fbatista">me</a>.
       </p>
