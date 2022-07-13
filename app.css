@@ -29,6 +29,10 @@ label.result span {
   width: 100%;
 }
 
+label.result span, label.result span code {
+  margin-top: 0.5rem;
+}
+
 fieldset { 
   padding-top: 1rem;
   margin-bottom: 1rem;
