@@ -76,14 +76,14 @@
             if (verbose) {
               output.push('H');
             }
-            break;
-          }
-          if (verbose) {
-            output.push('T');
+          } else {
+            if (verbose) {
+              output.push('T');
+            }
           }
           if (verbose && i != (f - 1)) {
             output.push(' | ');
-          }
+          }          
         }
       }
       
