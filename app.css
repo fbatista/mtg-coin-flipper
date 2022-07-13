@@ -21,6 +21,14 @@ label {
   margin-bottom: 1rem;
 }
 
+label.result {
+  flex-wrap: wrap;
+}
+
+label.result span {
+  width: 100%;
+}
+
 fieldset { 
   padding-top: 1rem;
   margin-bottom: 1rem;
