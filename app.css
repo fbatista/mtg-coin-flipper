@@ -27,6 +27,8 @@ label.result {
 
 label.result span {
   width: 100%;
+  font-weight: 900;
+  font-size: 200%;
 }
 
 label.result span, label.result span code {
