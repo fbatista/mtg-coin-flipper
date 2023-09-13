@@ -31,7 +31,7 @@
       ],
       {
         // timing options
-        duration: 300,
+        duration: 900,
         iterations: 1,
       },
     );
