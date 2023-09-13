@@ -22,6 +22,22 @@
     return x;
   }
 
+  function highlight(element) {
+    element.animate(
+      [
+        // keyframes
+        { color: "red"},
+        {color: "black" }
+      ],
+      {
+        // timing options
+        duration: 300,
+        iterations: 1,
+      },
+    );
+  }
+
+
   function inverseNormal(p) {
 
     const a1 = -39.6968302866538, a2 = 220.946098424521, a3 = -275.928510446969;
@@ -100,6 +116,7 @@
       } else {
         document.getElementById('competitive_wins_count').innerHTML = w.toString();
       }
+      highlight(document.getElementById('competitive_wins_count'));
     }
 
     document.getElementById('frenetic_solver').onreset = function(e) {
@@ -144,6 +161,7 @@
       } else {
         document.getElementById('frenetic_wins_count').innerHTML = w.toString();
       }
+      highlight(document.getElementById('frenetic_wins_count'));
     };
   
     document.getElementById('okaun_solver').onreset = function(e) {
@@ -204,7 +222,8 @@
           }
         }
         document.getElementById('okaun_multi').innerHTML = Math.pow(2, w);
-  
+        highlight(document.getElementById('okaun_multi'));
+        
         if (verbose) {
           document.getElementById('okaun_wins_count').innerHTML = (
             w.toString() + '<br/>' +
@@ -213,6 +232,7 @@
         } else {
           document.getElementById('okaun_wins_count').innerHTML = w.toString();
         }
+        highlight(document.getElementById('okaun_wins_count'));
       }, 100)
     };
   
@@ -311,7 +331,8 @@
         }
       }
       document.getElementById('krark_hand').innerHTML = (w < s) ? 'Yes' : 'No';
-  
+      highlight(document.getElementById('krark_hand'));
+      
       if (verbose) {
         document.getElementById('krark_wins_count').innerHTML = (
           w.toString() + '<br/>' +
@@ -320,6 +341,7 @@
       } else {
         document.getElementById('krark_wins_count').innerHTML = w.toString();
       }
+      highlight(document.getElementById('krark_wins_count'));
     };
   
     document.getElementById('mana_solver').onreset = function(e) {
@@ -404,7 +426,8 @@
         }
       }
       document.getElementById('mana_hand').innerHTML = (w < s) ? 'Yes' : 'No';
-  
+      highlight(document.getElementById('mana_hand'));
+      
       if (verbose) {
         document.getElementById('mana_generated').innerHTML = (
           current_mana.toString() + '<br/>' +
@@ -413,6 +436,7 @@
       } else {
         document.getElementById('mana_generated').innerHTML = current_mana.toString();
       }
+      highlight(document.getElementById('mana_generated'));
     };
   };
 
